@@ -1,5 +1,6 @@
 import wikipediaapi
 from collections import Counter
+import asyncio
 
 class Firstletter():
     def __init__(self, language='ru', title='Категория:Животные_по_алфавиту'):
@@ -7,7 +8,7 @@ class Firstletter():
         # zoo_list = []
         self.__cat = self.__wiki_wiki.page(title)
 
-    def sava(self):
+    async def sava(self):
         f = open('./text.txt', 'w')
         for p in self.__cat.categorymembers.values():
             if p.namespace == wikipediaapi.Namespace.CATEGORY:
@@ -15,7 +16,9 @@ class Firstletter():
             elif p.namespace == wikipediaapi.Namespace.MAIN:
                 f.write(str(p.title) + '\n')
 
-    def print_dict(self):
+    async def print_dict(self):
+        print('*'*8, 'wait', '*'*8)
+        await self.sava()
         f = open('./text.txt', 'r')
         first_letter = Counter(s[0] for s in f)
 
@@ -26,7 +29,6 @@ class Firstletter():
 
 
 a = Firstletter()
-# a.sava()
-a.print_dict()
+asyncio.run(a.print_dict())
 
 
