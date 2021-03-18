@@ -19,7 +19,7 @@ class Firstletter:
             elif p.namespace == wikipediaapi.Namespace.MAIN:
                 f.write(str(p.title) + "\n")
 
-    def has_cyrillic(self, text):
+    def __has_cyrillic(self, text):
         if self.__abc == 'ru':
             return bool(re.search('[а-яА-Я]', text))
         if self.__abc == 'en':
@@ -32,7 +32,7 @@ class Firstletter:
         print("*" * 8, "wait", "*" * 8)
         await self.sava()
         f = open("./text.txt", "r")
-        first_letter = Counter(s[0] for s in f if self.has_cyrillic(s[0]))
+        first_letter = Counter(s[0] for s in f if self.__has_cyrillic(s[0]))
 
         list_keys = list(first_letter.keys())
         list_keys.sort()
@@ -40,5 +40,5 @@ class Firstletter:
             print(i, ":", first_letter[i])
 
 
-a = Firstletter()
+a = Firstletter(abc='ru')
 asyncio.run(a.print_dict())
