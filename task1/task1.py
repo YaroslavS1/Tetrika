@@ -7,7 +7,7 @@ def task(array):
 
     index = data.find('0')
     if index == -1:
-        return 'Error! There is no 0 in the array'
+        raise ValueError('Error! There is no 0 in the array')
     else:
         return index
 
