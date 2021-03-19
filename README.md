@@ -3,7 +3,7 @@
 
 # task3
 Для запуска 
-```
+``` 
 uvicorn main:app
 ```
 Пример POST запроса представлен в __example.py__
